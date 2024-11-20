@@ -8,9 +8,21 @@ const signup = () => {
   const [messageType, setMessageType] = useState('');
   const [isLoading, setIsLoading] = useState(false);
    const navigate = useNavigate();
+
+const handleSignup = async () => {
+  const { username, password } = signupForm;
+
+  if (!username || !password) {
+    setMessage('Please fill in both username and password.');
+    setMessageType('error');
+    return;
+  }
+
+  setIsLoading(true);
+  setMessage('');
   return (
     <div>signup</div>
   )
 }
-
+}
 export default signup
