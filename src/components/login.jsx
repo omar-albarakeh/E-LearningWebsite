@@ -10,9 +10,19 @@ const login = () => {
 
   const navigate = useNavigate();
 
+  const handleLogin = async () => {
+  const { username, password } = loginForm;
+
+  if (!username || !password) {
+    setMessage('Please fill in both username and password.');
+    setMessageType('error');
+    return;
+  }
+
   return (
     <div>login</div>
   )
+}
 }
 
 export default login
