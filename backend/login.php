@@ -13,6 +13,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $input = json_decode(file_get_contents("php://input"), true);
     $username = $input['username'] ?? '';
     $password = $input['password'] ?? '';
+    
+      if (empty($username) || empty($password)) {
+        echo json_encode(["status" => "error", "message" => "All fields are required."]);
+        exit();
+    }
+
 
 }
 ?>
