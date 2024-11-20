@@ -8,6 +8,7 @@ const login = () => {
   const [messageType, setMessageType] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
+  const navigate = useNavigate();
 
   return (
     <div>login</div>
