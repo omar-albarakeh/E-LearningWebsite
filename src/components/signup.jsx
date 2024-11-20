@@ -7,6 +7,7 @@ const signup = () => {
   const [message, setMessage] = useState('');
   const [messageType, setMessageType] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+   const navigate = useNavigate();
   return (
     <div>signup</div>
   )
