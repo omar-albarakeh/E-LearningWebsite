@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom'; 
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import '../styles/styles.css';
 
-const login = () => {
+const Login = () => {
   const [loginForm, setLoginForm] = useState({ username: '', password: '' });
   const [message, setMessage] = useState('');
   const [messageType, setMessageType] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-
   const navigate = useNavigate();
 
   const handleLogin = async () => {
@@ -18,9 +18,11 @@ const login = () => {
     setMessageType('error');
     return;
   }
+
   setIsLoading(true);
   setMessage('');
-   try {
+
+  try {
     const response = await axios.post('http://localhost/e-learning/backend/login.php', {
       username,
       password,
@@ -45,9 +47,29 @@ const login = () => {
 
 
   return (
-    <div>login</div>
-  )
-}
-}
+    <div className="container">
+      <h1>Login</h1>
+      {message && <p className={`message ${messageType}`}>{message}</p>}
+      <input
+        type="text"
+        placeholder="Username"
+        value={loginForm.username}
+        onChange={(e) => setLoginForm({ ...loginForm, username: e.target.value })}
+      />
+      <input
+        type="password"
+        placeholder="Password"
+        value={loginForm.password}
+        onChange={(e) => setLoginForm({ ...loginForm, password: e.target.value })}
+      />
+      <button onClick={handleLogin} disabled={isLoading}>
+        {isLoading ? 'Logging in...' : 'Login'}
+      </button>
+      <p>
+        Don't have an account? <Link to="/register">Register here</Link>
+      </p>
+    </div>
+  );
+};
 
-export default login
+export default Login;
