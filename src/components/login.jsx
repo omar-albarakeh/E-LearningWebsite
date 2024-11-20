@@ -18,6 +18,31 @@ const login = () => {
     setMessageType('error');
     return;
   }
+  setIsLoading(true);
+  setMessage('');
+   try {
+    const response = await axios.post('http://localhost/e-learning/backend/login.php', {
+      username,
+      password,
+    });
+
+    if (response.data.token) {
+      localStorage.setItem('token', response.data.token);
+      setMessage('Login successful!');
+      setMessageType('success');
+      navigate('/student');
+    } else {
+      setMessage(response.data.message || 'Invalid username or password.');
+      setMessageType('error');
+    }
+  } catch (error) {
+    setMessage('Error logging in. Please try again.');
+    setMessageType('error');
+  } finally {
+    setIsLoading(false);
+  }
+};
+
 
   return (
     <div>login</div>
