@@ -54,5 +54,20 @@ const AdminDashboard = () => {
     }
   };
 
+const handleAddCourse = async () => {
+    try {
+      const response = await axios.post('http://localhost/e-learning/backend/add_course.php', {
+        course_name: newCourse.name,
+        description: newCourse.description,
+        instructor_id: newCourse.instructorId,
+      });
+      alert(response.data.message);
+      setCourses([...courses, response.data.course]);
+      setNewCourse({ name: '', description: '', instructorId: '' });
+    } catch (error) {
+      console.error('Error adding course:', error);
+    }
+  };
+
 
 }
