@@ -13,7 +13,7 @@ const App = () => {
   const token = localStorage.getItem('token');
 
   const isAuthenticated = !!token;
-  const authRoutes = ['/login', '/register'];
+  const authRoutes = ['/login', '/register']; 
   const showNavFooter = isAuthenticated && !authRoutes.includes(location.pathname);
 
   return (
@@ -22,8 +22,10 @@ const App = () => {
       <div className="content">
         <Routes>
           <Route path="/" element={<Navigate to="/login" replace />} />
+
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Signup />} />
+
           {isAuthenticated ? (
             <>
               <Route path="/student" element={<StudentPage />} />
