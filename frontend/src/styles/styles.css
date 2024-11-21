@@ -180,3 +180,28 @@ button:hover {
 .footer a:hover {
   color: #2980b9;
 }
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem;
+  }
+
+  .navbar .logo {
+    margin-bottom: 1rem;
+  }
+
+  .navbar-links {
+    flex-direction: column;
+    width: 100%;
+    align-items: flex-start;
+  }
+
+  .navbar-links li {
+    margin: 0.5rem 0;
+  }
+
+  .footer {
+    font-size: 0.8rem;
+  }
+}
