@@ -5,8 +5,8 @@ import Footer from './components/Footer';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import StudentPage from './components/StudentDashboard';
-import InstructorPage from './components/AdminDashboard';
-import AdminPage from './components/InstructorDashboard';
+import InstructorPage from './components/InstructorDashboard';
+import AdminPage from './components/AdminDashboard';
 
 const App = () => {
   const location = useLocation();
