@@ -2,11 +2,11 @@ import React from 'react';
 import { Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import NavBar from './components/NavBar';
 import Footer from './components/Footer';
-import Login from './components/login';
-import Signup from './components/signup';
-import StudentPage from './components/student';
-import InstructorPage from './components/instructor';
-import AdminPage from './components/admin';
+import Login from './components/Login';
+import Signup from './components/Signup';
+import StudentPage from './components/StudentDashboard';
+import InstructorPage from './components/InstructorDashboard';
+import AdminPage from './components/AdminDashboard';
 
 const App = () => {
   const location = useLocation();
