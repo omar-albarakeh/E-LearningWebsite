@@ -33,4 +33,15 @@ const InstructorDashboard = () => {
     }
   };
 
+  const fetchAssignments = async (courseId) => {
+    try {
+      const response = await axios.get(
+        `http://localhost/e-learning/backend/course_assignments.php?course_id=${courseId}`
+      );
+      setAssignments(response.data);
+    } catch (error) {
+      console.error('Error fetching assignments:', error);
+    }
+  };
+
 }
