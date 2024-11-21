@@ -23,6 +23,18 @@ const StudentDashboard = () => {
       console.error('Error fetching courses:', error);
     }
   };
-
+ const fetchCourseStreams = async (courseId) => {
+    try {
+      const response = await axios.get(
+        `http://localhost/e-learning/backend/course_streams.php?course_id=${courseId}`
+      );
+      setStreams(response.data.streams);
+      setAssignments(response.data.assignments);
+      setComments(response.data.comments);
+      setSelectedCourse(courseId);
+    } catch (error) {
+      console.error('Error fetching course streams:', error);
+    }
+  };
 
 }
