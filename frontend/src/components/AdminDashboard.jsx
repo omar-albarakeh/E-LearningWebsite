@@ -31,4 +31,28 @@ const AdminDashboard = () => {
     }
   };
 
+  const handleAddUser = async () => {
+    try {
+      const response = await axios.post('http://localhost/e-learning/backend/add_user.php', newUser);
+      alert(response.data.message);
+      setUsers([...users, response.data.user]);
+      setNewUser({ name: '', email: '', role: 'student' });
+    } catch (error) {
+      console.error('Error adding user:', error);
+    }
+  };
+
+  const handleBanUser = async (userId) => {
+    try {
+      const response = await axios.post(
+        `http://localhost/e-learning/backend/ban_user.php?user_id=${userId}`
+      );
+      alert(response.data.message);
+      fetchUsers();
+    } catch (error) {
+      console.error('Error banning user:', error);
+    }
+  };
+
+
 }
