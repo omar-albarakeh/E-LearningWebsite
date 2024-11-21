@@ -20,26 +20,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit();
     }
 
-    $stmt = $conn->prepare("SELECT * FROM users WHERE username = ?");
+    $stmt = $conn->prepare("SELECT username FROM users WHERE username = ?");
     $stmt->bind_param("s", $username);
     $stmt->execute();
     $result = $stmt->get_result();
 
     if ($result->num_rows > 0) {
-        http_response_code(409);
         echo json_encode(["status" => "error", "message" => "Username already exists."]);
     } else {
-     
         $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
-        $stmt = $conn->prepare("INSERT INTO users (username, password, role) VALUES (?, ?, ?)");
         $defaultRole = 'student';
+        $stmt = $conn->prepare("INSERT INTO users (username, password, role) VALUES (?, ?, ?)");
         $stmt->bind_param("sss", $username, $hashedPassword, $defaultRole);
 
         if ($stmt->execute()) {
             echo json_encode(["message" => "Signup successful"]);
         } else {
-            http_response_code(500);
-            echo json_encode(["status" => "error", "message" => "Database error."]);
+            echo json_encode(["status" => "error", "message" => "Database error: " . $stmt->error]);
         }
     }
 

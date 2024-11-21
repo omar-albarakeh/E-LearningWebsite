@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import '../styles/styles.css';
 
 const Signup = () => {
   const [signupForm, setSignupForm] = useState({ username: '', password: '' });
@@ -11,41 +10,40 @@ const Signup = () => {
 
   const navigate = useNavigate();
 
-const handleSignup = async () => {
-  const { username, password } = signupForm;
+  const handleSignup = async () => {
+    const { username, password } = signupForm;
 
-  if (!username || !password) {
-    setMessage('Please fill in both username and password.');
-    setMessageType('error');
-    return;
-  }
-
-  setIsLoading(true);
-  setMessage('');
-
-  try {
-    const response = await axios.post('http://localhost/e-learning/backend/signup.php', {
-      username,
-      password,
-    });
-
-    if (response.data.message === 'Signup successful') {
-      setMessage('Signup successful! Redirecting to login...');
-      setMessageType('success');
-
-      setTimeout(() => navigate('/'), 2000);
-    } else {
-      setMessage(response.data.message || 'Error signing up.');
+    if (!username || !password) {
+      setMessage('Please fill in both username and password.');
       setMessageType('error');
+      return;
     }
-  } catch (error) {
-    setMessage('Error signing up. Please try again.');
-    setMessageType('error');
-  } finally {
-    setIsLoading(false);
-  }
-};
 
+    setIsLoading(true); 
+    setMessage(''); 
+
+    try {
+      const response = await axios.post(
+        'http://localhost/e-learning/backend/signup.php',
+        { username, password },
+        { headers: { 'Content-Type': 'application/json' } }
+      );
+
+      if (response.data.message === 'Signup successful') {
+        setMessage('Signup successful! Redirecting to login...');
+        setMessageType('success');
+        setTimeout(() => navigate('/'), 2000);
+      } else {
+        setMessage(response.data.message || 'Error signing up.');
+        setMessageType('error');
+      }
+    } catch (error) {
+      setMessage('Error signing up. Please try again.');
+      setMessageType('error');
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <div className="container">
