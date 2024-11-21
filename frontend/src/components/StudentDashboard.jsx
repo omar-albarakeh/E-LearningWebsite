@@ -9,4 +9,20 @@ const StudentDashboard = () => {
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState({ content: '', isPrivate: false });
   const [selectedFile, setSelectedFile] = useState(null);
+
+  
+  useEffect(() => {
+    fetchEnrolledCourses();
+  }, []);
+
+  const fetchEnrolledCourses = async () => {
+    try {
+      const response = await axios.get('http://localhost/e-learning/backend/student_courses.php');
+      setCourses(response.data);
+    } catch (error) {
+      console.error('Error fetching courses:', error);
+    }
+  };
+
+
 }
