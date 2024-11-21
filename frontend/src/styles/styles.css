@@ -114,3 +114,40 @@ button:hover {
   color: #3498db;
 }
 
+.navbar .logo {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #ecf0f1;
+}
+
+.navbar-links {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-links li {
+  margin-left: 1rem;
+}
+
+.navbar button {
+  background-color: #e74c3c;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.navbar button:hover {
+  background-color: #c0392b; 
+}
+.navbar-links .active a {
+  color: #3498db; 
+  font-weight: bold;
+  border-bottom: 2px solid #3498db;
+}
+
