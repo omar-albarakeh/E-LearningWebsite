@@ -1,10 +1,20 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation, Navigate } from 'react-router-dom';
+import NavBar from './components/NavBar';
+import Footer from './components/Footer';
 import Login from './components/login';
 import Signup from './components/signup';
-import Student from './components/student';
+import StudentPage from './components/student';
+import InstructorPage from './components/instructor';
+import AdminPage from './components/admin';
 
 const App = () => {
+  const location = useLocation();
+  const token = localStorage.getItem('token');
+
+  const isAuthenticated = !!token;
+  const authRoutes = ['/login', '/register'];
+  const showNavFooter = isAuthenticated && !authRoutes.includes(location.pathname);
   return (
     <Router>
       <Routes>
