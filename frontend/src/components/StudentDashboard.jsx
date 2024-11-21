@@ -37,4 +37,21 @@ const StudentDashboard = () => {
     }
   };
 
+  const handleSubmitAssignment = async (assignmentId) => {
+    const formData = new FormData();
+    formData.append('assignment_id', assignmentId);
+    formData.append('file', selectedFile);
+
+    try {
+      const response = await axios.post(
+        'http://localhost/e-learning/backend/submit_assignment.php',
+        formData
+      );
+      alert(response.data.message);
+      setSelectedFile(null);
+    } catch (error) {
+      console.error('Error submitting assignment:', error);
+    }
+  };
+
 }
