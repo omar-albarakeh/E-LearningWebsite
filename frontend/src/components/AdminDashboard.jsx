@@ -56,6 +56,19 @@ const InstructorDashboard = () => {
       console.error('Error adding announcement:', error);
     }
   };
+ const handleAddAssignment = async (courseId) => {
+    try {
+      const response = await axios.post(
+        'http://localhost/e-learning/backend/add_assignment.php',
+        { course_id: courseId, ...newAssignment }
+      );
+      alert(response.data.message);
+      fetchAssignments(courseId);
+      setNewAssignment({ title: '', description: '' });
+    } catch (error) {
+      console.error('Error adding assignment:', error);
+    }
+  };
 
 
 }
