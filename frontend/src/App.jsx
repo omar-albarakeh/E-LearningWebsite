@@ -15,14 +15,28 @@ const App = () => {
   const isAuthenticated = !!token;
   const authRoutes = ['/login', '/register'];
   const showNavFooter = isAuthenticated && !authRoutes.includes(location.pathname);
+
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/register" element={<Signup />} />
-        <Route path="/student" element={<Student />} />
-      </Routes>
-    </Router>
+    <div>
+      {showNavFooter && <NavBar />}
+      <div className="content">
+        <Routes>
+          <Route path="/" element={<Navigate to="/login" replace />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Signup />} />
+          {isAuthenticated ? (
+            <>
+              <Route path="/student" element={<StudentPage />} />
+              <Route path="/instructor" element={<InstructorPage />} />
+              <Route path="/admin" element={<AdminPage />} />
+            </>
+          ) : (
+            <Route path="*" element={<Navigate to="/login" replace />} />
+          )}
+        </Routes>
+      </div>
+      {showNavFooter && <Footer />}
+    </div>
   );
 };
 
