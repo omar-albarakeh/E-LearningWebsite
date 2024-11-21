@@ -68,6 +68,17 @@ const handleAddCourse = async () => {
       console.error('Error adding course:', error);
     }
   };
-
+ const handleEditCourse = async (courseId, updatedCourse) => {
+    try {
+      const response = await axios.put(
+        `http://localhost/e-learning/backend/edit_course.php?course_id=${courseId}`,
+        updatedCourse
+      );
+      alert(response.data.message);
+      fetchCourses(); 
+    } catch (error) {
+      console.error('Error editing course:', error);
+    }
+  };
 
 }
