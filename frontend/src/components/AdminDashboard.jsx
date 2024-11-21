@@ -69,6 +69,18 @@ const InstructorDashboard = () => {
       console.error('Error adding assignment:', error);
     }
   };
+  const handleInviteStudent = async (courseId) => {
+    try {
+      const response = await axios.post(
+        'http://localhost/e-learning/backend/invite_student.php',
+        { course_id: courseId, email: inviteEmail }
+      );
+      alert(response.data.message);
+      setInviteEmail('');
+    } catch (error) {
+      console.error('Error inviting student:', error);
+    }
+  };
 
 
 }
