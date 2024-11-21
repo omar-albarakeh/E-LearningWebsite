@@ -80,5 +80,16 @@ const handleAddCourse = async () => {
       console.error('Error editing course:', error);
     }
   };
+    const handleDeleteCourse = async (courseId) => {
+    try {
+      const response = await axios.delete(
+        `http://localhost/e-learning/backend/delete_course.php?course_id=${courseId}`
+      );
+      alert(response.data.message);
+      setCourses(courses.filter((course) => course.course_id !== courseId));
+    } catch (error) {
+      console.error('Error deleting course:', error);
+    }
+  };
 
 }
