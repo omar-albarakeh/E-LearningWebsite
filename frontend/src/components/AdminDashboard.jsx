@@ -8,4 +8,17 @@ const InstructorDashboard = () => {
   const [newAnnouncement, setNewAnnouncement] = useState('');
   const [newAssignment, setNewAssignment] = useState({ title: '', description: '' });
   const [inviteEmail, setInviteEmail] = useState('');
+
+    useEffect(() => {
+    fetchCourses();
+  }, []);
+  
+  const fetchCourses = async () => {
+    try {
+      const response = await axios.get('http://localhost/e-learning/backend/instructor_courses.php');
+      setCourses(response.data);
+    } catch (error) {
+      console.error('Error fetching courses:', error);
+    }
+  };
 }
