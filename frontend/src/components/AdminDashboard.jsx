@@ -12,7 +12,7 @@ const InstructorDashboard = () => {
     useEffect(() => {
     fetchCourses();
   }, []);
-  
+
   const fetchCourses = async () => {
     try {
       const response = await axios.get('http://localhost/e-learning/backend/instructor_courses.php');
@@ -21,4 +21,16 @@ const InstructorDashboard = () => {
       console.error('Error fetching courses:', error);
     }
   };
+
+    const fetchAnnouncements = async (courseId) => {
+    try {
+      const response = await axios.get(
+        `http://localhost/e-learning/backend/course_announcements.php?course_id=${courseId}`
+      );
+      setAnnouncements(response.data);
+    } catch (error) {
+      console.error('Error fetching announcements:', error);
+    }
+  };
+
 }
