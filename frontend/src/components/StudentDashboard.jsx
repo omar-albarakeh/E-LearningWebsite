@@ -54,4 +54,19 @@ const StudentDashboard = () => {
     }
   };
 
+    const handlePostComment = async () => {
+    try {
+      const response = await axios.post(
+        'http://localhost/e-learning/backend/post_comment.php',
+        { course_id: selectedCourse, ...newComment }
+      );
+      alert(response.data.message);
+      fetchCourseStreams(selectedCourse);
+      setNewComment({ content: '', isPrivate: false });
+    } catch (error) {
+      console.error('Error posting comment:', error);
+    }
+  };
+
+
 }
