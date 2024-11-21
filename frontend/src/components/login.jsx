@@ -29,10 +29,22 @@ const Login = () => {
     });
 
     if (response.data.token) {
-      localStorage.setItem('token', response.data.token);
+      const { token, role } = response.data;
+
+      localStorage.setItem('token', token);
       setMessage('Login successful!');
       setMessageType('success');
-      navigate('/student');
+
+      if (role === 'student') {
+        navigate('/student');
+      } else if (role === 'instructor') {
+        navigate('/instructor');
+      } else if (role === 'admin') {
+        navigate('/admin');
+      } else {
+        setMessage('Role not recognized.');
+        setMessageType('error');
+      }
     } else {
       setMessage(response.data.message || 'Invalid username or password.');
       setMessageType('error');

@@ -21,8 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit();
     }
 
-    
-    $stmt = $conn->prepare("SELECT user_id, password FROM users WHERE username = ?");
+    $stmt = $conn->prepare("SELECT user_id, password, role FROM users WHERE username = ?");
     $stmt->bind_param("s", $username);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -30,12 +29,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($result->num_rows > 0) {
         $user = $result->fetch_assoc();
         
-      
         if (password_verify($password, $user['password'])) {
-            
             $tokenPayload = [
                 "user_id" => $user['user_id'],
                 "username" => $username,
+                "role" => $user['role'],
                 "exp" => time() + 3600 
             ];
             $secretKey = "test123";
@@ -45,6 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 "status" => "success",
                 "message" => "Login successful.",
                 "token" => $token,
+                "role" => $user['role'] 
             ]);
         } else {
             echo json_encode(["status" => "error", "message" => "Invalid password."]);
